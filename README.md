@@ -47,8 +47,6 @@ As for the other games, I’ll let you discover them yourself!
 🧪 How to Run from Source
 Clone the repo
 
-git clone https://github.com/YourUsername/MiniGamePack-Unity.git
-
 Open in Unity Hub
 
 then
