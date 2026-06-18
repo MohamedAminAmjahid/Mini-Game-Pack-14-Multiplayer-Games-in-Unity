@@ -131,7 +131,8 @@ public class TypeScript : MonoBehaviour
 
     private void ReadLine()
     {
-        StreamReader sr = new StreamReader("Assets/Assets6/sent.txt");
+        string path = Path.Combine(Application.streamingAssetsPath,"sent.txt");
+        StreamReader sr = new StreamReader(path);
         int a = Random.Range(0, 15849);
         for (int i = 0; i < a; i++)
         {

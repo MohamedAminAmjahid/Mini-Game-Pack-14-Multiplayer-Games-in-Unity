@@ -17,7 +17,7 @@ public class WordScript : MonoBehaviour
 
     public GameObject rect;
 
-    private string[] words;
+    private List<string> words = new List<string>();
 
     private string[] used = new string[1000];
 
@@ -29,17 +29,20 @@ public class WordScript : MonoBehaviour
     bool end = false;
     void Start()
     {
-        StreamReader sr = new StreamReader("Assets/Assets7/engmix.txt");
-        string read = sr.ReadToEnd();
-        words = read.Split('\n');
-        int a = UnityEngine.Random.Range(0, words.Length);
-        output.text = words[a];
+        string path = Path.Combine(Application.streamingAssetsPath, "engmix.txt");
+        StreamReader sr = new StreamReader(path);
+        while (!sr.EndOfStream)
+        {
+            words.Add(sr.ReadLine());
+        }
+        output.text = words[UnityEngine.Random.Range(0, words.Count)];
         used[index] = output.text.Substring(0, output.text.Length - 1);
         index++;
         input.interactable = true;
         input.Select();
-        letter.text = output.text[output.text.Length - 2].ToString().ToUpper();
+        letter.text = output.text[output.text.Length - 1].ToString().ToUpper();
         sr.Close();
+
     }
 
     // Update is called once per frame
@@ -59,7 +62,7 @@ public class WordScript : MonoBehaviour
                 check = input.text.ToUpper();
                 if (check != "")
                 {
-                    if (check[0] == letter.text[0] && Array.IndexOf(words, check.ToLower() + "\r") != -1 && Array.IndexOf(used, check.ToLower()) == -1)
+                    if (check[0] == letter.text[0] && words.Contains(check.ToLower()) && Array.IndexOf(used, check.ToLower()) == -1)
                     {
                         turn++;
                         Invoke("resetInput", 4f);

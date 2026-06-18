@@ -12,7 +12,8 @@ public class Mots {
 		mots.Add ("Goseling James");
 		mots.Add ("Tim Berners Lee");
 		mots.Add ("Bennani Yassine");
-		StreamReader f = new StreamReader("BD\\mots.txt");
+        string path = Path.Combine(Application.streamingAssetsPath, "mots.txt");
+        StreamReader f = new StreamReader(path);
 		while(!f.EndOfStream)
 		{
 			mots.Add (f.ReadLine());
@@ -22,8 +23,9 @@ public class Mots {
 	}
 
 	public string getMotCourant() {
-		motCourant = mots[Random.Range(0, mots.Count)];
-		return motCourant;
+		motCourant = mots[UnityEngine.Random.Range(0, mots.Count)]; 
+
+        return motCourant;
 	}
 
 
